@@ -153,7 +153,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.listen(process.env.PORT || 3000);
 app.on('stormpath.ready', function() {
   app.listen(process.env.PORT || 3000);
 });
