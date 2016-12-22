@@ -1,6 +1,7 @@
 if (process.env.ENVIRONMENT !== "production") require('dotenv').config();
 
 var express = require('express');
+var stormpath = require('express-stormpath');
 var app = express();
 var dotenv = require('dotenv');
 var bodyParser = require('body-parser');
@@ -33,9 +34,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 
-app.use(stormpath.init(app, {
-  website: true
-}));
+app.use(stormpath.init(app, { website: true }));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -155,8 +154,8 @@ app.use(function(err, req, res, next) {
 
 
 app.listen(process.env.PORT || 3000);
-app.on('stormpath.ready', function () {
-  console.log('Server running on port 3000!');
+app.on('stormpath.ready', function() {
+  app.listen(process.env.PORT || 3000);
 });
 
 module.exports = app;
